@@ -24,7 +24,7 @@ function RepoDetails() {
       });
     };
     getRepoDetails();
-  }, []);
+  }, [data.owner, data.repo]);
 
   return (
     <>

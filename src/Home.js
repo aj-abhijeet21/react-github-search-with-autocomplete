@@ -11,30 +11,31 @@ function Home() {
   useEffect(() => {
     if (query !== "") {
       setTimeout(() => {
-        const getData = async () => {
-          const url = `https://api.github.com/search/repositories?q={${query}}{&page,per_page,sort,order}`;
-          const result = await fetch(url);
-          const response = await result.json();
-          const data = response?.items?.slice(0, 5);
-          const arr = [];
-          const sugg = [];
-          data.forEach((element) => {
-            arr.push({
-              name: element.name,
-              description: element.description,
-              owner: element.owner.login,
-            });
-            sugg.push(element.name);
-          });
-          setData(arr);
-          setSuggestions(sugg);
-        };
         getData();
       }, 300);
     } else {
       setSuggestions([]);
     }
   }, [query]);
+
+  const getData = async () => {
+    const url = `https://api.github.com/search/repositories?q={${query}}{&page,per_page,sort,order}`;
+    const result = await fetch(url);
+    const response = await result.json();
+    const data = response?.items?.slice(0, 5);
+    const arr = [];
+    const sugg = [];
+    data.forEach((element) => {
+      arr.push({
+        name: element.name,
+        description: element.description,
+        owner: element.owner.login,
+      });
+      sugg.push(element.name);
+    });
+    setData(arr);
+    setSuggestions(sugg);
+  };
 
   return (
     <div className="App">
