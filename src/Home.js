@@ -16,7 +16,7 @@ function Home() {
     } else {
       setSuggestions([]);
     }
-  }, [query]);
+  }, [query, getData]);
 
   const getData = async () => {
     const url = `https://api.github.com/search/repositories?q={${query}}{&page,per_page,sort,order}`;
