@@ -11,14 +11,14 @@ function Home() {
   useEffect(() => {
     if (query !== "") {
       setTimeout(() => {
-        getData();
+        getData(query);
       }, 300);
     } else {
       setSuggestions([]);
     }
-  }, [query, getData]);
+  }, [query]);
 
-  const getData = async () => {
+  const getData = async (query) => {
     const url = `https://api.github.com/search/repositories?q={${query}}{&page,per_page,sort,order}`;
     const result = await fetch(url);
     const response = await result.json();
